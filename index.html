@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EstudoMat | Matemática descomplicada</title>
+    <title>EstudoMat | Matemática com atividades</title>
     <style>
         /* ===== RESET E ESTILOS GLOBAIS ===== */
         * {
@@ -300,6 +300,161 @@
             background-color: #f1f5f9;
         }
 
+        /* ===== SEÇÃO DE ATIVIDADES POR NÍVEL ===== */
+        .nivel-section {
+            margin: 3rem 0;
+        }
+
+        .nivel-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+        }
+
+        .tab-btn {
+            background: none;
+            border: none;
+            padding: 0.8rem 2rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #64748b;
+            cursor: pointer;
+            border-radius: 30px 30px 0 0;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .tab-btn:hover {
+            color: #1e3a5f;
+            background-color: #f1f5f9;
+        }
+
+        .tab-btn.active {
+            color: #1e3a5f;
+            background-color: #fbbf24;
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .atividade-card {
+            background-color: white;
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+            border: 1px solid #e2e8f0;
+        }
+
+        .atividade-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .atividade-icon {
+            font-size: 2.5rem;
+            background-color: #fbbf24;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #0f172a;
+        }
+
+        .atividade-titulo {
+            font-size: 1.5rem;
+            color: #0f172a;
+        }
+
+        .questao {
+            background-color: #f8fafc;
+            border-left: 4px solid #1e3a5f;
+            padding: 1.2rem;
+            margin: 1rem 0;
+            border-radius: 0 12px 12px 0;
+        }
+
+        .alternativas {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .alternativa {
+            background-color: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 0.8rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: center;
+        }
+
+        .alternativa:hover {
+            border-color: #fbbf24;
+            background-color: #fef9c3;
+        }
+
+        .alternativa.certa {
+            background-color: #86efac;
+            border-color: #15803d;
+            color: #14532d;
+        }
+
+        .alternativa.errada {
+            background-color: #fecaca;
+            border-color: #b91c1c;
+            color: #7f1d1d;
+        }
+
+        .gabarito-btn {
+            background-color: #1e293b;
+            color: white;
+            border: none;
+            padding: 0.5rem 1.2rem;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            margin-top: 1rem;
+        }
+
+        .gabarito-btn:hover {
+            background-color: #fbbf24;
+            color: #0f172a;
+        }
+
+        .resposta-correta {
+            margin-top: 1rem;
+            padding: 1rem;
+            background-color: #dcfce7;
+            border-radius: 12px;
+            color: #166534;
+            display: none;
+        }
+
+        .resposta-correta.mostrar {
+            display: block;
+        }
+
         /* rodapé */
         footer {
             background-color: #0f172a;
@@ -321,6 +476,10 @@
             .nav-container {
                 gap: 0.5rem;
             }
+            .tab-btn {
+                padding: 0.5rem 1rem;
+                font-size: 1rem;
+            }
         }
     </style>
 </head>
@@ -334,24 +493,23 @@
 
     <nav>
         <div class="nav-container">
-            <a href="#">Início</a>
-            <a href="#">Fundamental</a>
-            <a href="#">Médio</a>
-            <a href="#">Superior</a>
-            <a href="#">Exercícios</a>
-            <a href="#">Fórmulas</a>
+            <a href="#inicio">Início</a>
+            <a href="#areas">Áreas</a>
+            <a href="#atividades">Atividades</a>
+            <a href="#formulas">Fórmulas</a>
+            <a href="#tabela">Conteúdos</a>
         </div>
     </nav>
 
     <main>
         <!-- Seção de boas-vindas -->
-        <section class="intro">
-            <h2>📘 Aprenda matemática no seu ritmo</h2>
-            <p>Aqui você encontra desde aritmética básica até cálculo avançado. Todo conteúdo é organizado por tópicos, com exemplos práticos e dicas para facilitar o estudo.</p>
+        <section id="inicio" class="intro">
+            <h2>📘 Aprenda matemática praticando</h2>
+            <p>Aqui você encontra teoria e atividades organizadas por nível de ensino. Escolha seu nível e comece a resolver exercícios com gabarito comentado.</p>
         </section>
 
         <!-- Cards de assuntos - matemática básica e avançada -->
-        <h2 class="section-title">📌 Principais áreas</h2>
+        <h2 id="areas" class="section-title">📌 Principais áreas</h2>
         <div class="cards-grid">
             <!-- Card 1 -->
             <article class="card">
@@ -366,7 +524,7 @@
                         <li>Regra de três</li>
                         <li>Porcentagem</li>
                     </ul>
-                    <a href="#" class="btn">Ver tópicos</a>
+                    <a href="#atividades" class="btn">Praticar</a>
                 </div>
             </article>
 
@@ -383,7 +541,7 @@
                         <li>Sólidos geométricos</li>
                         <li>Trigonometria básica</li>
                     </ul>
-                    <a href="#" class="btn">Explorar</a>
+                    <a href="#atividades" class="btn">Praticar</a>
                 </div>
             </article>
 
@@ -400,64 +558,166 @@
                         <li>Fatoração</li>
                         <li>Inequações</li>
                     </ul>
-                    <a href="#" class="btn">Estudar</a>
-                </div>
-            </article>
-
-            <!-- Card 4 -->
-            <article class="card">
-                <div class="card-header">
-                    <span>📈</span> Estatística
-                </div>
-                <div class="card-body">
-                    <p>Análise de dados, gráficos, médias, moda, mediana e probabilidade básica.</p>
-                    <ul class="topic-list">
-                        <li>Média, moda e mediana</li>
-                        <li>Desvio padrão</li>
-                        <li>Probabilidade</li>
-                        <li>Interpretação de gráficos</li>
-                    </ul>
-                    <a href="#" class="btn">Acessar</a>
-                </div>
-            </article>
-
-            <!-- Card 5 -->
-            <article class="card">
-                <div class="card-header">
-                    <span>∫</span> Cálculo
-                </div>
-                <div class="card-body">
-                    <p>Limites, derivadas, integrais e aplicações para nível superior.</p>
-                    <ul class="topic-list">
-                        <li>Limites fundamentais</li>
-                        <li>Regras de derivação</li>
-                        <li>Integrais definidas</li>
-                        <li>Aplicações</li>
-                    </ul>
-                    <a href="#" class="btn">Aprofundar</a>
-                </div>
-            </article>
-
-            <!-- Card 6 -->
-            <article class="card">
-                <div class="card-header">
-                    <span>🎲</span> Matemática Discreta
-                </div>
-                <div class="card-body">
-                    <p>Lógica, conjuntos, combinatória, grafos e teoria dos números.</p>
-                    <ul class="topic-list">
-                        <li>Análise combinatória</li>
-                        <li>Princípio da indução</li>
-                        <li>Teoria dos conjuntos</li>
-                        <li>Grafos básicos</li>
-                    </ul>
-                    <a href="#" class="btn">Ver mais</a>
+                    <a href="#atividades" class="btn">Praticar</a>
                 </div>
             </article>
         </div>
 
+        <!-- SEÇÃO DE ATIVIDADES POR NÍVEL -->
+        <h2 id="atividades" class="section-title">📝 Atividades por nível</h2>
+        
+        <div class="nivel-section">
+            <!-- Abas de navegação entre níveis -->
+            <div class="nivel-tabs">
+                <button class="tab-btn active" onclick="mostrarNivel('fundamental')">🏆 Fundamental</button>
+                <button class="tab-btn" onclick="mostrarNivel('medio')">📚 Ensino Médio</button>
+                <button class="tab-btn" onclick="mostrarNivel('superior')">🎓 Superior</button>
+            </div>
+
+            <!-- Conteúdo - Ensino Fundamental -->
+            <div id="fundamental" class="tab-content active">
+                <!-- Atividade 1 - Fundamental -->
+                <div class="atividade-card">
+                    <div class="atividade-header">
+                        <div class="atividade-icon">🔢</div>
+                        <h3 class="atividade-titulo">Frações - Soma e Subtração</h3>
+                    </div>
+                    <div class="questao">
+                        <strong>Questão 1 (Fundamental):</strong> Calcule o valor da expressão: 2/3 + 1/6 - 1/2
+                    </div>
+                    <div class="alternativas" id="questao1-fund">
+                        <div class="alternativa" onclick="verificarResposta(this, '1/3', 'fund1')">A) 1/2</div>
+                        <div class="alternativa" onclick="verificarResposta(this, '1/3', 'fund1')">B) 1/3</div>
+                        <div class="alternativa" onclick="verificarResposta(this, '1/3', 'fund1')">C) 2/3</div>
+                        <div class="alternativa" onclick="verificarResposta(this, '1/3', 'fund1')">D) 1/4</div>
+                    </div>
+                    <button class="gabarito-btn" onclick="mostrarGabarito('gabarito1-fund')">Ver gabarito comentado</button>
+                    <div id="gabarito1-fund" class="resposta-correta">
+                        <strong>Resposta correta: B) 1/3</strong><br>
+                        Explicação: 2/3 + 1/6 = 4/6 + 1/6 = 5/6; 5/6 - 1/2 = 5/6 - 3/6 = 2/6 = 1/3.
+                    </div>
+                </div>
+
+                <!-- Atividade 2 - Fundamental -->
+                <div class="atividade-card">
+                    <div class="atividade-header">
+                        <div class="atividade-icon">📐</div>
+                        <h3 class="atividade-titulo">Geometria - Área do Retângulo</h3>
+                    </div>
+                    <div class="questao">
+                        <strong>Questão 2 (Fundamental):</strong> Um terreno retangular tem 12 metros de comprimento e 8 metros de largura. Qual é a área total em m²?
+                    </div>
+                    <div class="alternativas" id="questao2-fund">
+                        <div class="alternativa" onclick="verificarResposta(this, '96', 'fund2')">A) 86 m²</div>
+                        <div class="alternativa" onclick="verificarResposta(this, '96', 'fund2')">B) 96 m²</div>
+                        <div class="alternativa" onclick="verificarResposta(this, '96', 'fund2')">C) 106 m²</div>
+                        <div class="alternativa" onclick="verificarResposta(this, '96', 'fund2')">D) 78 m²</div>
+                    </div>
+                    <button class="gabarito-btn" onclick="mostrarGabarito('gabarito2-fund')">Ver gabarito comentado</button>
+                    <div id="gabarito2-fund" class="resposta-correta">
+                        <strong>Resposta correta: B) 96 m²</strong><br>
+                        Explicação: Área do retângulo = comprimento × largura = 12 × 8 = 96 m².
+                    </div>
+                </div>
+            </div>
+
+            <!-- Conteúdo - Ensino Médio -->
+            <div id="medio" class="tab-content">
+                <!-- Atividade 1 - Médio -->
+                <div class="atividade-card">
+                    <div class="atividade-header">
+                        <div class="atividade-icon">📊</div>
+                        <h3 class="atividade-titulo">Função Quadrática - Vértice</h3>
+                    </div>
+                    <div class="questao">
+                        <strong>Questão 1 (Ensino Médio):</strong> Qual é o vértice da função f(x) = x² - 6x + 5?
+                    </div>
+                    <div class="alternativas" id="questao1-med">
+                        <div class="alternativa" onclick="verificarResposta(this, '(3, -4)', 'med1')">A) (3, 4)</div>
+                        <div class="alternativa" onclick="verificarResposta(this, '(3, -4)', 'med1')">B) (-3, 4)</div>
+                        <div class="alternativa" onclick="verificarResposta(this, '(3, -4)', 'med1')">C) (3, -4)</div>
+                        <div class="alternativa" onclick="verificarResposta(this, '(3, -4)', 'med1')">D) (-3, -4)</div>
+                    </div>
+                    <button class="gabarito-btn" onclick="mostrarGabarito('gabarito1-med')">Ver gabarito comentado</button>
+                    <div id="gabarito1-med" class="resposta-correta">
+                        <strong>Resposta correta: C) (3, -4)</strong><br>
+                        Explicação: x_v = -b/2a = 6/2 = 3; y_v = f(3) = 9 - 18 + 5 = -4.
+                    </div>
+                </div>
+
+                <!-- Atividade 2 - Médio -->
+                <div class="atividade-card">
+                    <div class="atividade-header">
+                        <div class="atividade-icon">📈</div>
+                        <h3 class="atividade-titulo">Progressão Aritmética</h3>
+                    </div>
+                    <div class="questao">
+                        <strong>Questão 2 (Ensino Médio):</strong> Em uma PA, o primeiro termo é 5 e a razão é 3. Qual é o 10º termo?
+                    </div>
+                    <div class="alternativas" id="questao2-med">
+                        <div class="alternativa" onclick="verificarResposta(this, '32', 'med2')">A) 30</div>
+                        <div class="alternativa" onclick="verificarResposta(this, '32', 'med2')">B) 32</div>
+                        <div class="alternativa" onclick="verificarResposta(this, '32', 'med2')">C) 35</div>
+                        <div class="alternativa" onclick="verificarResposta(this, '32', 'med2')">D) 28</div>
+                    </div>
+                    <button class="gabarito-btn" onclick="mostrarGabarito('gabarito2-med')">Ver gabarito comentado</button>
+                    <div id="gabarito2-med" class="resposta-correta">
+                        <strong>Resposta correta: B) 32</strong><br>
+                        Explicação: a_n = a₁ + (n-1)r → a₁₀ = 5 + 9×3 = 5 + 27 = 32.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Conteúdo - Superior -->
+            <div id="superior" class="tab-content">
+                <!-- Atividade 1 - Superior -->
+                <div class="atividade-card">
+                    <div class="atividade-header">
+                        <div class="atividade-icon">∫</div>
+                        <h3 class="atividade-titulo">Cálculo - Derivada</h3>
+                    </div>
+                    <div class="questao">
+                        <strong>Questão 1 (Superior):</strong> Qual é a derivada de f(x) = 3x⁴ + 2x³ - 5x + 7?
+                    </div>
+                    <div class="alternativas" id="questao1-sup">
+                        <div class="alternativa" onclick="verificarResposta(this, '12x³+6x²-5', 'sup1')">A) 12x³ + 6x² - 5</div>
+                        <div class="alternativa" onclick="verificarResposta(this, '12x³+6x²-5', 'sup1')">B) 12x⁴ + 6x³ - 5</div>
+                        <div class="alternativa" onclick="verificarResposta(this, '12x³+6x²-5', 'sup1')">C) 3x³ + 2x² - 5</div>
+                        <div class="alternativa" onclick="verificarResposta(this, '12x³+6x²-5', 'sup1')">D) 12x³ + 6x² + 5</div>
+                    </div>
+                    <button class="gabarito-btn" onclick="mostrarGabarito('gabarito1-sup')">Ver gabarito comentado</button>
+                    <div id="gabarito1-sup" class="resposta-correta">
+                        <strong>Resposta correta: A) 12x³ + 6x² - 5</strong><br>
+                        Explicação: d/dx [3x⁴] = 12x³; d/dx [2x³] = 6x²; d/dx [-5x] = -5; d/dx [7] = 0.
+                    </div>
+                </div>
+
+                <!-- Atividade 2 - Superior -->
+                <div class="atividade-card">
+                    <div class="atividade-header">
+                        <div class="atividade-icon">∫</div>
+                        <h3 class="atividade-titulo">Cálculo - Integral básica</h3>
+                    </div>
+                    <div class="questao">
+                        <strong>Questão 2 (Superior):</strong> Calcule a integral indefinida: ∫ (6x² + 4x) dx
+                    </div>
+                    <div class="alternativas" id="questao2-sup">
+                        <div class="alternativa" onclick="verificarResposta(this, '2x³+2x²+C', 'sup2')">A) 6x³ + 4x² + C</div>
+                        <div class="alternativa" onclick="verificarResposta(this, '2x³+2x²+C', 'sup2')">B) 2x³ + 2x² + C</div>
+                        <div class="alternativa" onclick="verificarResposta(this, '2x³+2x²+C', 'sup2')">C) 3x³ + 2x² + C</div>
+                        <div class="alternativa" onclick="verificarResposta(this, '2x³+2x²+C', 'sup2')">D) 2x² + 2x + C</div>
+                    </div>
+                    <button class="gabarito-btn" onclick="mostrarGabarito('gabarito2-sup')">Ver gabarito comentado</button>
+                    <div id="gabarito2-sup" class="resposta-correta">
+                        <strong>Resposta correta: B) 2x³ + 2x² + C</strong><br>
+                        Explicação: ∫6x² dx = 2x³; ∫4x dx = 2x²; + constante C.
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- Bloco de fórmulas em destaque -->
-        <section class="formulas-destaque">
+        <section id="formulas" class="formulas-destaque">
             <h3>⭐ Fórmulas essenciais</h3>
             <div class="formulas-grid">
                 <div class="formula-item">
@@ -484,7 +744,7 @@
         </section>
 
         <!-- Tabela comparativa de conteúdos -->
-        <h2 class="section-title">📅 Tabela de conteúdos por nível</h2>
+        <h2 id="tabela" class="section-title">📅 Tabela de conteúdos por nível</h2>
         <div class="tabela-container">
             <table>
                 <thead>
@@ -547,5 +807,39 @@
         <p>© 2025 EstudoMat - Site de estudos matemáticos | Contato: estudomat@exemplo.com</p>
         <p style="margin-top: 0.5rem;">"A matemática não mente. Mente quem não sabe usá-la."</p>
     </footer>
-</body>
-</html>
+
+    <script>
+        // Função para alternar entre as abas de nível
+        function mostrarNivel(nivel) {
+            // Esconde todos os conteúdos
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Remove classe active de todos os botões
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Mostra o conteúdo selecionado
+            document.getElementById(nivel).classList.add('active');
+            
+            // Ativa o botão clicado (event target não funciona diretamente aqui)
+            let botoes = document.querySelectorAll('.tab-btn');
+            if (nivel === 'fundamental') botoes[0].classList.add('active');
+            if (nivel === 'medio') botoes[1].classList.add('active');
+            if (nivel === 'superior') botoes[2].classList.add('active');
+        }
+
+        // Função para verificar resposta das alternativas
+        function verificarResposta(elemento, respostaCorreta, questaoId) {
+            // Remove classes de acerto/erro de todas as alternativas da mesma questão
+            let parent = elemento.parentNode;
+            let alternativas = parent.children;
+            
+            for (let i = 0; i < alternativas.length; i++) {
+                alternativas[i].classList.remove('certa', 'errada');
+            }
+            
+            // Verifica se o texto da alternativa (sem a letra) corresponde à resposta correta
+            let textoAlternativa =
