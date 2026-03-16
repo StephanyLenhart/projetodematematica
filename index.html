@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EstudoMat | Matemática descomplicada</title>
+    <style>
+        /* ===== RESET E ESTILOS GLOBAIS ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f8fafc;
+            color: #1e293b;
+            line-height: 1.6;
+        }
+
+        /* ===== CABEÇALHO ===== */
+        header {
+            background: linear-gradient(135deg, #0f172a, #1e3a5f);
+            color: white;
+            padding: 2rem 0;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .logo {
+            font-size: 2.5rem;
+            font-weight: 700;
+            letter-spacing: -1px;
+            margin-bottom: 0.5rem;
+        }
+
+        .logo span {
+            color: #fbbf24;
+            border-bottom: 3px solid #fbbf24;
+            padding-bottom: 4px;
+        }
+
+        .slogan {
+            font-size: 1.2rem;
+            color: #cbd5e1;
+            max-width: 600px;
+        }
+
+        /* ===== NAVEGAÇÃO ===== */
+        nav {
+            background-color: #1e293b;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0.8rem 2rem;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+
+        .nav-container a {
+            color: #e2e8f0;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-container a:hover {
+            background-color: #fbbf24;
+            color: #0f172a;
+            transform: translateY(-2px);
+        }
+
+        /* ===== CONTEÚDO PRINCIPAL ===== */
+        main {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+        }
+
+        /* seção boas-vindas */
+        .intro {
+            background: linear-gradient(135deg, #ffffff, #f1f5f9);
+            border-radius: 20px;
+            padding: 2.5rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            border-left: 8px solid #fbbf24;
+        }
+
+        .intro h2 {
+            font-size: 2rem;
+            color: #0f172a;
+            margin-bottom: 1rem;
+        }
+
+        .intro p {
+            font-size: 1.2rem;
+            color: #334155;
+        }
+
+        /* grade de cards de conteúdo */
+        .section-title {
+            font-size: 2rem;
+            color: #0f172a;
+            margin: 3rem 0 1.5rem 0;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 80px;
+            height: 4px;
+            background-color: #fbbf24;
+            border-radius: 2px;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 1.5rem;
+        }
+
+        .card {
+            background-color: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #e2e8f0;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            border-color: #fbbf24;
+        }
+
+        .card-header {
+            background: linear-gradient(145deg, #1e3a5f, #0f172a);
+            color: white;
+            padding: 1.2rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card-header i {
+            font-size: 2rem;
+            color: #fbbf24;
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        .topic-list {
+            list-style: none;
+            margin: 1rem 0;
+        }
+
+        .topic-list li {
+            margin: 0.8rem 0;
+            padding-left: 1.8rem;
+            position: relative;
+        }
+
+        .topic-list li::before {
+            content: "➗";
+            position: absolute;
+            left: 0;
+            color: #fbbf24;
+            font-weight: bold;
+        }
+
+        .topic-list li:nth-child(2)::before {
+            content: "✖️";
+        }
+        .topic-list li:nth-child(3)::before {
+            content: "➖";
+        }
+        .topic-list li:nth-child(4)::before {
+            content: "➕";
+        }
+        .topic-list li:nth-child(5)::before {
+            content: "√";
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: #1e3a5f;
+            color: white;
+            text-decoration: none;
+            padding: 0.7rem 1.5rem;
+            border-radius: 30px;
+            font-weight: 600;
+            margin-top: 1rem;
+            transition: background-color 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: #fbbf24;
+            color: #0f172a;
+        }
+
+        /* seção de fórmulas em destaque */
+        .formulas-destaque {
+            background-color: #1e293b;
+            border-radius: 24px;
+            padding: 2.5rem;
+            margin: 3rem 0;
+            color: #f8fafc;
+        }
+
+        .formulas-destaque h3 {
+            font-size: 1.8rem;
+            color: #fbbf24;
+            margin-bottom: 1.5rem;
+        }
+
+        .formulas-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .formula-item {
+            background-color: #0f172a;
+            border-radius: 16px;
+            padding: 1.5rem;
+            border-left: 5px solid #fbbf24;
+            font-size: 1.2rem;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+
+        .formula-item .explicacao {
+            font-size: 0.9rem;
+            color: #94a3b8;
+            margin-top: 0.5rem;
+        }
+
+        /* tabela de conteúdos */
+        .tabela-container {
+            overflow-x: auto;
+            background-color: white;
+            border-radius: 16px;
+            padding: 1rem;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+            margin: 2rem 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        th {
+            background-color: #1e3a5f;
+            color: white;
+            padding: 1rem;
+            font-weight: 600;
+        }
+
+        td {
+            padding: 1rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        tr:hover {
+            background-color: #f1f5f9;
+        }
+
+        /* rodapé */
+        footer {
+            background-color: #0f172a;
+            color: #94a3b8;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+            font-size: 0.9rem;
+        }
+
+        /* responsividade */
+        @media (max-width: 768px) {
+            .logo {
+                font-size: 2rem;
+            }
+            .intro h2 {
+                font-size: 1.5rem;
+            }
+            .nav-container {
+                gap: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">Estudo<span>Mat</span></div>
+            <p class="slogan">Matemática clara, objetiva e gratuita para todos os níveis</p>
+        </div>
+    </header>
+
+    <nav>
+        <div class="nav-container">
+            <a href="#">Início</a>
+            <a href="#">Fundamental</a>
+            <a href="#">Médio</a>
+            <a href="#">Superior</a>
+            <a href="#">Exercícios</a>
+            <a href="#">Fórmulas</a>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Seção de boas-vindas -->
+        <section class="intro">
+            <h2>📘 Aprenda matemática no seu ritmo</h2>
+            <p>Aqui você encontra desde aritmética básica até cálculo avançado. Todo conteúdo é organizado por tópicos, com exemplos práticos e dicas para facilitar o estudo.</p>
+        </section>
+
+        <!-- Cards de assuntos - matemática básica e avançada -->
+        <h2 class="section-title">📌 Principais áreas</h2>
+        <div class="cards-grid">
+            <!-- Card 1 -->
+            <article class="card">
+                <div class="card-header">
+                    <span>🔢</span> Aritmética
+                </div>
+                <div class="card-body">
+                    <p>Operações fundamentais, frações, porcentagem, MMC, MDC e muito mais.</p>
+                    <ul class="topic-list">
+                        <li>Operações básicas</li>
+                        <li>Frações e decimais</li>
+                        <li>Regra de três</li>
+                        <li>Porcentagem</li>
+                    </ul>
+                    <a href="#" class="btn">Ver tópicos</a>
+                </div>
+            </article>
+
+            <!-- Card 2 -->
+            <article class="card">
+                <div class="card-header">
+                    <span>📐</span> Geometria
+                </div>
+                <div class="card-body">
+                    <p>Áreas, volumes, ângulos, Teorema de Pitágoras, geometria plana e espacial.</p>
+                    <ul class="topic-list">
+                        <li>Perímetro e área</li>
+                        <li>Triângulos e círculos</li>
+                        <li>Sólidos geométricos</li>
+                        <li>Trigonometria básica</li>
+                    </ul>
+                    <a href="#" class="btn">Explorar</a>
+                </div>
+            </article>
+
+            <!-- Card 3 -->
+            <article class="card">
+                <div class="card-header">
+                    <span>📊</span> Álgebra
+                </div>
+                <div class="card-body">
+                    <p>Equações, funções, polinômios, sistemas lineares e produtos notáveis.</p>
+                    <ul class="topic-list">
+                        <li>Equação do 1º e 2º grau</li>
+                        <li>Funções afim e quadrática</li>
+                        <li>Fatoração</li>
+                        <li>Inequações</li>
+                    </ul>
+                    <a href="#" class="btn">Estudar</a>
+                </div>
+            </article>
+
+            <!-- Card 4 -->
+            <article class="card">
+                <div class="card-header">
+                    <span>📈</span> Estatística
+                </div>
+                <div class="card-body">
+                    <p>Análise de dados, gráficos, médias, moda, mediana e probabilidade básica.</p>
+                    <ul class="topic-list">
+                        <li>Média, moda e mediana</li>
+                        <li>Desvio padrão</li>
+                        <li>Probabilidade</li>
+                        <li>Interpretação de gráficos</li>
+                    </ul>
+                    <a href="#" class="btn">Acessar</a>
+                </div>
+            </article>
+
+            <!-- Card 5 -->
+            <article class="card">
+                <div class="card-header">
+                    <span>∫</span> Cálculo
+                </div>
+                <div class="card-body">
+                    <p>Limites, derivadas, integrais e aplicações para nível superior.</p>
+                    <ul class="topic-list">
+                        <li>Limites fundamentais</li>
+                        <li>Regras de derivação</li>
+                        <li>Integrais definidas</li>
+                        <li>Aplicações</li>
+                    </ul>
+                    <a href="#" class="btn">Aprofundar</a>
+                </div>
+            </article>
+
+            <!-- Card 6 -->
+            <article class="card">
+                <div class="card-header">
+                    <span>🎲</span> Matemática Discreta
+                </div>
+                <div class="card-body">
+                    <p>Lógica, conjuntos, combinatória, grafos e teoria dos números.</p>
+                    <ul class="topic-list">
+                        <li>Análise combinatória</li>
+                        <li>Princípio da indução</li>
+                        <li>Teoria dos conjuntos</li>
+                        <li>Grafos básicos</li>
+                    </ul>
+                    <a href="#" class="btn">Ver mais</a>
+                </div>
+            </article>
+        </div>
+
+        <!-- Bloco de fórmulas em destaque -->
+        <section class="formulas-destaque">
+            <h3>⭐ Fórmulas essenciais</h3>
+            <div class="formulas-grid">
+                <div class="formula-item">
+                    <strong>Bhaskara</strong><br>
+                    x = [-b ± √(b²-4ac)] / 2a
+                    <div class="explicacao">Equação do 2º grau</div>
+                </div>
+                <div class="formula-item">
+                    <strong>Pitágoras</strong><br>
+                    a² = b² + c²
+                    <div class="explicacao">Triângulo retângulo</div>
+                </div>
+                <div class="formula-item">
+                    <strong>Área do círculo</strong><br>
+                    A = π · r²
+                    <div class="explicacao">r = raio</div>
+                </div>
+                <div class="formula-item">
+                    <strong>Derivada (potência)</strong><br>
+                    d/dx [xⁿ] = n·xⁿ⁻¹
+                    <div class="explicacao">n real</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tabela comparativa de conteúdos -->
+        <h2 class="section-title">📅 Tabela de conteúdos por nível</h2>
+        <div class="tabela-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nível</th>
+                        <th>Assunto</th>
+                        <th>Exemplo prático</th>
+                        <th>Dificuldade</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Fundamental</td>
+                        <td>Frações</td>
+                        <td>1/2 + 2/3 = 7/6</td>
+                        <td>⭐</td>
+                    </tr>
+                    <tr>
+                        <td>Fundamental</td>
+                        <td>Porcentagem</td>
+                        <td>20% de 80 = 16</td>
+                        <td>⭐</td>
+                    </tr>
+                    <tr>
+                        <td>Médio</td>
+                        <td>Função quadrática</td>
+                        <td>Vértice: ( -b/2a , -Δ/4a )</td>
+                        <td>⭐⭐</td>
+                    </tr>
+                    <tr>
+                        <td>Médio</td>
+                        <td>Progressão aritmética</td>
+                        <td>Termo geral: aₙ = a₁ + (n-1)r</td>
+                        <td>⭐⭐</td>
+                    </tr>
+                    <tr>
+                        <td>Superior</td>
+                        <td>Derivada de sen(x)</td>
+                        <td>f'(x) = cos(x)</td>
+                        <td>⭐⭐⭐</td>
+                    </tr>
+                    <tr>
+                        <td>Superior</td>
+                        <td>Integral por partes</td>
+                        <td>∫ u dv = uv - ∫ v du</td>
+                        <td>⭐⭐⭐</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Dica de estudo extra -->
+        <div style="background-color: #fef9c3; border-radius: 16px; padding: 1.8rem; margin-top: 2rem; border-left: 8px solid #fbbf24;">
+            <h3 style="display: flex; align-items: center; gap: 10px; color: #854d0e;">🧠 Dica de estudo</h3>
+            <p style="font-size: 1.1rem;">Pratique resolvendo exercícios todos os dias. A matemática é como um músculo: quanto mais você exercita, mais forte fica. Comece pelos problemas mais simples e aumente gradualmente a dificuldade.</p>
+        </div>
+    </main>
+
+    <footer>
+        <p>© 2025 EstudoMat - Site de estudos matemáticos | Contato: estudomat@exemplo.com</p>
+        <p style="margin-top: 0.5rem;">"A matemática não mente. Mente quem não sabe usá-la."</p>
+    </footer>
+</body>
+</html>
